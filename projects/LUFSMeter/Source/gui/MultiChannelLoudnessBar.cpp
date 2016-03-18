@@ -49,7 +49,7 @@ MultiChannelLoudnessBar::~MultiChannelLoudnessBar ()
     maxLoudness.removeListener(this);
 }
 
-void MultiChannelLoudnessBar::setLoudness (const Array<float>& multiChannelLoudness)
+void MultiChannelLoudnessBar::setLoudness (const std::vector<float>& multiChannelLoudness)
 {
     if (multiChannelLoudness.size() != currentMultiChannelLoudness.size())
     {
