@@ -14,12 +14,12 @@ ifeq ($(CONFIG),Debug)
   OBJDIR := build/intermediate/Debug
   OUTDIR := build
 
-  ifeq ($(TARGET_ARCH),)
-    TARGET_ARCH := -march=native
-  endif
+#  ifeq ($(TARGET_ARCH),)
+#    TARGET_ARCH := -march=native
+#  endif
 
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "LUFSMETER_STANDALONE=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=0.6.0" -D "JUCE_APP_VERSION_HEX=0x600" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../libraries/juce/modules
-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -std=c++11
   CXXFLAGS += $(CFLAGS)
   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
   LDDEPS :=
@@ -35,9 +35,9 @@ ifeq ($(CONFIG),Release)
   OBJDIR := build/intermediate/Release
   OUTDIR := build
 
-  ifeq ($(TARGET_ARCH),)
-    TARGET_ARCH := -march=native
-  endif
+#  ifeq ($(TARGET_ARCH),)
+#    TARGET_ARCH := -march=native
+#  endif
 
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "LUFSMETER_STANDALONE=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=0.6.0" -D "JUCE_APP_VERSION_HEX=0x600" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../libraries/juce/modules
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
