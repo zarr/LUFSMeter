@@ -42,7 +42,7 @@ LUFSMeterAudioProcessor::LUFSMeterAudioProcessor()
     loudnessBarWidth (var(-50)),
     loudnessBarMinValue (var(-41)),
     loudnessBarMaxValue (var(-14)),
-    showIntegratedLoudnessHistory (var(true)),
+    showIntegratedLoudnessHistory (var(false)),
     showLoudnessRangeHistory (var(true)),
     showShortTermLoudnessHistory (var(true)),
     showMomentaryLoudnessHistory (var(true)),

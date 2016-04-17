@@ -52,7 +52,7 @@ void BackgroundGrid::paint (Graphics& g)
 //    g.fillAll();
     
     // Draw the lines
-    g.setColour(Colour(40,40,40));
+    //g.setColour(Colour(40,40,40));
     const float startX = 0.0f;
     const float endX = getWidth();
     float distanceBetweenTopAndBottomLine = getHeight() - topBorder - bottomBorder;
@@ -64,6 +64,11 @@ void BackgroundGrid::paint (Graphics& g)
     // Draw the remaining lines
     for (int i=1; i<numberOfLines; i++)
     {
+        if (i==3) {
+            g.setColour(Colour(40,240,40));
+        } else {
+            g.setColour(Colour(40,40,40));
+        }
         float distanceFromTop = topBorder + float(i) * distanceBetweenTopAndBottomLine / (numberOfLines-1);
         // Draw a horizontal line
         float startY = floor(float(int(distanceFromTop))) - 0.5;
