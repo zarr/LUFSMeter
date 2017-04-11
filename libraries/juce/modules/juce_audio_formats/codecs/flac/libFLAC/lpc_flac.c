@@ -55,7 +55,7 @@
 #define M_LN2 0.69314718055994530942
 #endif
 
-#if !defined(HAVE_LROUND)
+#if (!defined(__GNUC__) && !defined(HAVE_LROUND)) || __cplusplus < 201103L
 #if defined(_MSC_VER)
 #include <float.h>
 #define copysign _copysign
