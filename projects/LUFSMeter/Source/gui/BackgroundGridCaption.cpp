@@ -56,7 +56,7 @@ void BackgroundGridCaption::paint (Graphics& g)
     g.fillAll(Colours::black);
     
     //g.setColour(Colour(40,40,40));
-    //g.setColour(Colour(60,60,60));
+    g.setColour(Colour(60,60,60));
     float fontHeight = 16.0f;
     float halfFontHeight = fontHeight/2.0f;
     const Font font (fontHeight);
@@ -67,11 +67,6 @@ void BackgroundGridCaption::paint (Graphics& g)
     const double delta = (double(maxLoudness.getValue()) - double(minLoudness.getValue()))/double(numberOfLines-1);
     for (int i=0; i<numberOfLines; i++)
     {
-        if (i==3) {
-            g.setColour(Colour(60,255,60));
-        } else {
-            g.setColour(Colour(60,60,60));
-        }
         float positionOfLine = floor( float(int(( distanceBetweenLevelBarAndTop)) + float(i) * distanceBetweenTopAndBottomLine / (numberOfLines-1) )) - 0.5;
         // - 0.5 ensures that the line will be drawn on a single row of pixels. 
         // Otherwise, two rows of pixels would have been used for one line.
