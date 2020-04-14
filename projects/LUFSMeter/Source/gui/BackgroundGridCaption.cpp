@@ -93,6 +93,38 @@ void BackgroundGridCaption::paint (Graphics& g)
         caption -= delta;
     }
     
+    // Print target line caption
+    double target = -16.0;
+    double minLoudnessValue = double(minLoudness.getValue());
+    double maxLoudnessValue = double(maxLoudness.getValue());
+
+    if (minLoudnessValue < target && target < maxLoudnessValue) {
+        g.setColour(Colour(60,255,60));
+
+        double targetDiffFromMax = maxLoudnessValue - target;
+        double loudnessUnitRange = maxLoudnessValue - minLoudnessValue;
+        double distancePerLoudnessUnit = distanceBetweenTopAndBottomLine / loudnessUnitRange;
+
+        float positionOfLine = floor( targetDiffFromMax * distancePerLoudnessUnit ) - 0.5;
+        float topLeftY = positionOfLine;
+
+        int numberOfDecimalPlaces = 1;
+        if (std::abs(target - floor(target + 0.5)) < 0.05)
+        {
+            numberOfDecimalPlaces = 0;
+        }
+        const int maximumNumberOfTextLines = 1;
+        const float minimumHorizontalScale = 0.7f;
+        g.drawFittedText(String(target, numberOfDecimalPlaces),
+                         topLeftX,
+                         topLeftY,
+                         getWidth(),
+                         fontHeight,
+                         juce::Justification::centred,
+                         maximumNumberOfTextLines,
+                         minimumHorizontalScale);
+    }
+
     // Print the units.
     const int maximumNumberOfTextLines = 1;
     g.drawFittedText("LUFS", 

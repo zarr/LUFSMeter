@@ -31,8 +31,13 @@
 
 
 //==============================================================================
-BackgroundGrid::BackgroundGrid ()
+BackgroundGrid::BackgroundGrid (const Value & minLoudnessToReferTo,
+                                const Value & maxLoudnessToReferTo)
 {
+    minLoudness.referTo(minLoudnessToReferTo);
+    minLoudness.addListener(this);
+    maxLoudness.referTo(maxLoudnessToReferTo);
+    maxLoudness.addListener(this);
 }
 
 BackgroundGrid::~BackgroundGrid ()
@@ -75,4 +80,29 @@ void BackgroundGrid::paint (Graphics& g)
         float endY = startY;
         g.drawLine(startX, startY, endX, endY);  
     }
+
+    // Print target line caption
+    double target = -16.0;
+    double minLoudnessValue = double(minLoudness.getValue());
+    double maxLoudnessValue = double(maxLoudness.getValue());
+
+    if (minLoudnessValue < target && target < maxLoudnessValue) {
+        g.setColour(Colour(60,255,60));
+
+        double targetDiffFromMax = maxLoudnessValue - target;
+        double loudnessUnitRange = maxLoudnessValue - minLoudnessValue;
+        double distancePerLoudnessUnit = distanceBetweenTopAndBottomLine / loudnessUnitRange;
+
+        float startY = floor( targetDiffFromMax * distancePerLoudnessUnit ) - 0.5;
+        float endY = startY;
+
+        g.drawLine(startX, startY, endX, endY);
+    }
+}
+
+void BackgroundGrid::valueChanged (Value & value)
+{
+    // Either the minLoudness or the maxLoudness has changed.
+    // Time for a repaint.
+    repaint();
 }

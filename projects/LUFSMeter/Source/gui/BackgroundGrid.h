@@ -36,17 +36,22 @@
 //==============================================================================
 /**
 */
-class BackgroundGrid  : public Component
+class BackgroundGrid  : public Component,
+                        public Value::Listener
 {
 public:
-    BackgroundGrid ();
+    BackgroundGrid (const Value & minLoudnessToReferTo,
+                    const Value & maxLoudnessToReferTo);
     
     ~BackgroundGrid ();
 
     void paint (Graphics& g) override;
     
 private:
-    
+    void valueChanged (Value & value) override;
+
+    Value minLoudness;
+    Value maxLoudness;
 };
 
 

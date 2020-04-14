@@ -42,6 +42,8 @@ LUFSMeterAudioProcessorEditor::LUFSMeterAudioProcessorEditor (LUFSMeterAudioProc
     integratedLoudnessValue (var(-300.0)),
     distanceBetweenLoudnessBarAndTop (10),
     distanceBetweenLoudnessBarAndBottom (32),
+    backgroundGrid(getProcessor()->loudnessBarMinValue,
+                   getProcessor()->loudnessBarMaxValue),
     backgroundGridCaption (distanceBetweenLoudnessBarAndTop, 
                            distanceBetweenLoudnessBarAndBottom, 
                            getProcessor()->loudnessBarMinValue, 
